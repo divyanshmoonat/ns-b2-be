@@ -1,0 +1,61 @@
+Parts of web development
+
+Front End ->
+Back End ?
+
+Client - Server (Back End) -> Logic of the application , Stores Data
+
+Options for tech stack for backend?
+Java => Hibernate, Struts, Spring, Spring Boot, JSP etc
+Php => Laravel, CI (Code Igniter), Slim, Symphony etc
+Ruby => ROR (Ruby on Rails) etc
+Python => Django etc
+GoLang => ?
+C# (.net) => MVC, Entity etc
+JavaScript => Express JS, Ember JS, Nest JS etc
+etc
+
+Framework vs Library
+React? => Small set of methods and classes (small sized) => Library
+Angular? => Huge set of methods and classes (large sized) => Frameworks
+
+NodeJS and Express JS?
+NodeJS is a runtime environment for JavaScript.
+ExpressJS is a backend framework based on JavaScript.
+
+Database DB ?
+Place where all the data is stored (Textual Data)
+WE NEVER STORE PHYSICAL FILES INSIDE A DATABASE LIKE DOCUMENTS, AUDIO, VIDEO ETC (Server)
+
+Types of DB
+
+Structed Database : SQL (Structured Query Language) / RDBMS (Relational Database Management System) => MySQL, MSSQL, PostgreSQL, Oracle etc
+Unstructured Database / Non Relational Databases : MongoDB (MQL), Dynamo DB, Cassandra DB etc
+
+Request/ Respones Cycle (Client-Server Model)
+Front End => Backend (Express JS/Node JS) => Database => Backend => Front End
+
+MERN (Mongo Express React and Node)
+MEAN
+Java FS Developer
+
+Full Stack => FE (HTML, CSS, JS) + BE (PHP/JAVA/PYTHON/Express)
+
+Mobile Dev
+
+Android : Java based and Kotlin language
+iOS : Swift
+
+Hybrid Mobile development : 
+Ionic
+Cordava
+React Native : 
+Flutter
+
+
+Steps to setup a backend application based on NodeJS
+1. create a folder
+2. run npm init in the folder
+3. answer basic quetsions asked by npm
+4. create a index.js file and write your code
+5. run the file by running command node <filename> e.g node index.js
