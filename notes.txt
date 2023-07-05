@@ -59,3 +59,15 @@ Steps to setup a backend application based on NodeJS
 3. answer basic quetsions asked by npm
 4. create a index.js file and write your code
 5. run the file by running command node <filename> e.g node index.js
+
+Core Modules : 
+1. os
+2. fs
+3. events
+4. http
+
+
+HTTP Server
+1. http module import
+2. http.createServer()
+3. listne(portNo)
