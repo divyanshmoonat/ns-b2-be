@@ -1,7 +1,17 @@
-const os = require("node:os");
+const os = require("node:os"); // CJS
 const fs = require("node:fs");
 const events = require("node:events");
 const http = require("node:http");
+
+const functions = require("./module.js");
+
+// const functions = require("divtestcalc");
+
+const sum = functions.add(5, 7);
+console.log(sum);
+
+const difference = functions.subtract(20, 2);
+console.log(difference);
 
 // console.log(os.arch());
 // console.log("A", os.EOL, "B");
@@ -122,9 +132,41 @@ let counter = 0;
 //   myEmitter.emit(SIGNAL_CHANGE, signalColors[index]);
 // }, 30_000);
 
+// Sample JSON data
+const todos = [
+  { id: 1, title: "lomre ipsum", completed: true },
+  { id: 2, title: "lomre ipsum1", completed: true },
+  { id: 3, title: "lomre ipsum2", completed: false },
+  { id: 4, title: "lomre ipsum3", completed: false },
+  { id: 5, title: "lomre ipsum4", completed: true },
+  { id: 6, title: "lomre ipsum5", completed: true },
+  { id: 7, title: "lomre ipsum6", completed: false },
+];
+
+const todosString = JSON.stringify(todos);
+
+// API ROUTE
+const server = (req, res) => {
+  console.log("URL", req.method);
+  if (req.url === "/todos") {
+    // Endpoint
+    if (req.method === "GET") {
+      // res.write("To do list will appear here, this is a GET request");
+      res.end(todosString);
+    } else if (req.method === "POST") {
+      res.write("This route will be used to create a new ToDo");
+    }
+  } else if (req.url === "/posts") {
+    res.write("Posts list will appear here");
+  } else {
+    res.write(`Error 404, request route ${req.url} not found`);
+  }
+  res.end(); // Server sends the response back to the client
+};
+
+const onServerUp = () => {
+  console.log("Server is up and running on port 8080");
+};
+
 // HTTP Module
-http
-  .createServer(() => {
-    console.log("SERVER IS UP AND RUNNING", os.cpus()[0].model);
-  })
-  .listen(8080);
+// http.createServer(server).listen(8080, onServerUp);
