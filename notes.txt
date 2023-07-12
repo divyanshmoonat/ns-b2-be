@@ -74,3 +74,47 @@ HTTP Server
 
 
 Postman => It is a tool used to test the output of the APIs.
+
+JS Engines
+
+Google Chrome => v8
+Mozilla Firefox => Spider Monkey
+Edge => Chakra
+etc
+
+
+Created Server -> Listening on a port 
+
+Sent a request => Server emits a request event => Event listerner is trigerred
+
+
+API (Application Programming Interface)
+Types : 
+
+SOAP (Simple Object Access Protocol) => Envelops of Data (XML)
+REST (ReprsEntational State Transfer) => Raw data (JSON)
+
+https://my.newtonschool.co/instructor-portal?tab=student-calendar&course-hash=lgvewm97ohjr
+
+RESTful APIs (HTTP)
+Methods of APIs
+
+GET : Used to retreive the data from the server (E.g Get the list of products, get a list of todos etc)
+POST : Used to send the data to the server in order to create a resource (E.g Submitting a form, Placing an order etc)
+PUT : Used to replace the data on the server (E.g Replace a social media post)
+PATCH : Used to update the record on the server (E.g Update my profile etc)
+DELETE : Used to delete any record on the server (E.g Delete my account etc)
+OPTIONS : Used to check if any resource is accesible to the server (Pre Flight Respone - CORS)
+
+A request has 2 parts
+Header
+Body
+
+
+Response
+Header
+Body
+
+
+Static API : Which has same url and always return same set of data
+Dynamic API : Which has a dynamic part in URL or in Body and sends different data when the dynamic part changes
