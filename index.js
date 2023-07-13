@@ -1,6 +1,37 @@
 const express = require("express");
 const app = express(); // http.createServer()
 
+require("dotenv").config();
+
+console.log(process.env.SERCRET_NUMBER); // Environment variable
+
+app.use(express.json()); // Middleware
+
+app.use((req, res, next) => {
+  console.log("AAAA");
+  // Security check
+  if (req.body.token === 12345) {
+    next();
+  } else {
+    res.status(401).json({
+      messsage: "Access denied",
+    });
+  }
+});
+
+app.get("/get-number", (req, res) => {
+  const secretNumber = process.env.SERCRET_NUMBER;
+  if (secretNumber) {
+    res.json({
+      number: secretNumber,
+    });
+  } else {
+    res.status(404).json({
+      err: "Not found",
+    });
+  }
+});
+
 app.get("/", (req, res) => {
   res.send("The express server is up and running");
 });
@@ -25,6 +56,8 @@ app.get("/user/:userId", (req, res) => {
 });
 
 app.post("/user", (req, res) => {
+  // console.log(req.body);
+  console.log("BBBBB");
   const responseJson = {
     sucees: true,
     message: "User created successfully",

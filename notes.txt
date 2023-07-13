@@ -118,3 +118,19 @@ Body
 
 Static API : Which has same url and always return same set of data
 Dynamic API : Which has a dynamic part in URL or in Body and sends different data when the dynamic part changes
+
+
+API 
+React -> Backend (Node)
+Client => Server
+
+Server => Server
+
+Environment Variables
+Set : Manual process done by a different way in different OS
+Get : process.env.VARIABLE_NAME
+
+Middleware : 
+
+
+Requsest -> Middleware (app.use) -> API End point
