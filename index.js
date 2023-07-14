@@ -1,23 +1,34 @@
 const express = require("express");
 const app = express(); // http.createServer()
+const fs = require("node:fs");
+
+const userRouter = require("./user.js");
 
 require("dotenv").config();
 
 console.log(process.env.SERCRET_NUMBER); // Environment variable
 
-app.use(express.json()); // Middleware
+app.use(express.json()); // Middleware to get req.body in json format
 
-app.use((req, res, next) => {
-  console.log("AAAA");
+app.use(express.static("public_files")); // Middleware to server files from a particular folder
+
+app.use(express.urlencoded({ extended: true })); // Middleware to get url encoded data
+
+const myAuthMiddleware = (req, res, next) => {
+  console.log(req.url);
   // Security check
-  if (req.body.token === 12345) {
+  if (req.query.apiKey === "f234r-asfe243f-af42we4f") {
     next();
   } else {
     res.status(401).json({
-      messsage: "Access denied",
+      messsage: "API Key is required, please paas it in URL",
     });
   }
-});
+};
+
+// app.use(myAuthMiddleware);
+
+app.use(userRouter);
 
 app.get("/get-number", (req, res) => {
   const secretNumber = process.env.SERCRET_NUMBER;
@@ -46,44 +57,6 @@ app.get("/todos", (req, res) => {
   res.json(todo);
 });
 
-app.get("/user/:userId", (req, res) => {
-  console.log(req.params.userId);
-  const user = {
-    userId: req.params.userId,
-  };
-
-  res.json(user);
-});
-
-app.post("/user", (req, res) => {
-  // console.log(req.body);
-  console.log("BBBBB");
-  const responseJson = {
-    sucees: true,
-    message: "User created successfully",
-  };
-
-  res.json(responseJson);
-});
-
-app.put("/user", (req, res) => {
-  const putResponse = {
-    success: true,
-    message: "User replaced successfully",
-  };
-
-  res.json(putResponse);
-});
-
-app.delete("/user", (req, res) => {
-  const deleteResponse = {
-    success: true,
-    message: "User deleted successfully",
-  };
-
-  res.json(deleteResponse);
-});
-
 const products = [
   { id: 1, name: "Product Name", price: 2000, quantity: 50 },
   { id: 2, name: "Product Name", price: 2000, quantity: 50 },
@@ -98,6 +71,28 @@ app.get("/product/:productId", (req, res) => {
   } else {
     res.status(404).json({ message: "Product not found" });
   }
+});
+
+app.get("/get-file-list", (req, res) => {
+  res.json({
+    sample: "http://localhost:5000/sample.txt",
+    image1: "http://localhost:5000/callstack.png",
+    image2: "http://localhost:5000/Linkedlist.png",
+  });
+  // fs.readFile("./files/sample.txt", (err, data) => {
+  //   if (err) {
+  //     res.status(400).json({
+  //       message: "Something went wrong, please try again later",
+  //     });
+  //   } else {
+  //     const fileData = data.toString();
+  //     res.json({
+  //       sample: 'http://localhost:5000/sample.txt',
+  //       image1: 'http://localhost:5000/callback.png',
+  //       image2: 'http://localhost:5000/Linkedlist.png',
+  //     });
+  //   }
+  // });
 });
 
 const port = 5000;

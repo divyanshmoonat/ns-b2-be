@@ -134,3 +134,32 @@ Middleware :
 
 
 Requsest -> Middleware (app.use) -> API End point
+
+Application Level : Applies to the whole app (app.use())
+API Level : Only effects a particular end point
+
+Req and Response parts : 
+Header : Meta data (Basic information of API, server name, origin details etc)
+Body : Actual requested or sent data
+
+
+
+***** INTERVIEW QUESTION****
+What is MVC?
+
+Design Pattern
+
+MVC (Model View Controller)
+
+Controller : Receivs a request and perorms business logic, send the response
+Model : It determines the structure of the data (E.g username, dob, email)
+View : Where you see the UI (React JS)
+
+Layers : It is segregation of code.
+
+eComm Website : 
+
+Product listing and detail page
+Cart
+Checkout module
+My Account
