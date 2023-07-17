@@ -137,6 +137,7 @@ Requsest -> Middleware (app.use) -> API End point
 
 Application Level : Applies to the whole app (app.use())
 API Level : Only effects a particular end point
+Module Level : Applies to all the routes of a particular module
 
 Req and Response parts : 
 Header : Meta data (Basic information of API, server name, origin details etc)
@@ -163,3 +164,14 @@ Product listing and detail page
 Cart
 Checkout module
 My Account
+
+17 July
+Express router
+1. import express module
+2. initialize a express router new express.Router()
+3. change app.get and app.post with router.get and router.post
+4. connect app and router using app.use(router);
+5. create a routes folder
+6. create files in routes folder based on our module requirement
+7. move the respective routes in their files
+8. remove the common part of the route and put it in index file with app.use() in step 4
