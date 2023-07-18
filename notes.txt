@@ -175,3 +175,25 @@ Express router
 6. create files in routes folder based on our module requirement
 7. move the respective routes in their files
 8. remove the common part of the route and put it in index file with app.use() in step 4
+
+
+18 July
+
+Same Origin vs Cross Origin Policy
+
+CROSS ORIGIN POLICY IS IMPLEMENTED BY WEB BROWSERS
+
+CORS (Cross Origin Resource Sharing)
+
+Origin => Place from where your request is originated
+
+Cross Orign Example
+Origin => http://localhost:3000/
+Destination => http://localhost:5000/
+
+Origin => http://abc.com
+Destination => http://xyz.com
+
+Same Origin Example
+Origin => https://google.com
+Destination => https://google.com

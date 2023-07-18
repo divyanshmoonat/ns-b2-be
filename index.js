@@ -1,4 +1,6 @@
 const express = require("express");
+const responseTime = require("response-time");
+const cors = require("cors");
 
 const cartRoutes = require("./routes/cart.js");
 const userRoutes = require("./routes/user.js");
@@ -7,10 +9,12 @@ const authMiddleware = require("./middlewares/auth.js");
 
 const app = express(); // http.createServer()
 
+app.use(express.json()); // Middleware to get req.body in json format
+app.use(responseTime());
+app.use(cors());
+
 app.use("/api/v1/cart", cartRoutes); // Connect cartRoutes routes with app
 app.use("/api/v1/user", authMiddleware, userRoutes); // Connect userRoutes routes with app
-
-app.use(express.json()); // Middleware to get req.body in json format
 
 // e-Commerce
 /**
