@@ -304,3 +304,15 @@ db.students.find({
 db.students.find({
      age: { $gt: 30, $lt: 50 }
 })
+
+
+DB Schema (ecommerce)
+
+product : id, price, name, qty
+users
+orders etc
+
+
+Primary Key : A value which uniquely identifies a record in a colleciton/database.
+
+MongoDB : _id => UUID

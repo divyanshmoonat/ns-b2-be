@@ -1,9 +1,11 @@
 const express = require("express");
 const responseTime = require("response-time");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 const cartRoutes = require("./routes/cart.js");
 const userRoutes = require("./routes/user.js");
+const productRoutes = require("./routes/product.js");
 
 const authMiddleware = require("./middlewares/auth.js");
 
@@ -15,6 +17,19 @@ app.use(cors());
 
 app.use("/api/v1/cart", cartRoutes); // Connect cartRoutes routes with app
 app.use("/api/v1/user", authMiddleware, userRoutes); // Connect userRoutes routes with app
+app.use("/api/v1/product", productRoutes);
+
+const connectDB = async () => {
+  await mongoose.connect("mongodb://127.0.0.1:27017/ecommerce");
+};
+
+connectDB()
+  .then(() => {
+    console.log("Connection with Database established!");
+  })
+  .catch((err) => {
+    console.log("UNABLE TO CONNECT TO DATABASE", err);
+  });
 
 // e-Commerce
 /**
