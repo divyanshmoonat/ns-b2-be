@@ -18,7 +18,7 @@ const productSchema = {
     required: false,
     default: 0,
   },
-  ratings: {
+  rating: {
     type: Number,
     required: false,
     default: 5,

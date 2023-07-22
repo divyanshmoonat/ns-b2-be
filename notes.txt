@@ -249,13 +249,14 @@ delete() : To delete records
 db.students.find({name: "John Doe"})
 
 Operators : 
-Conditional
+Comparision
     $gt
     $lt
     $gte
     $lte
     $ne
     $eq
+    $in
 
 Logical Operators
     $and
@@ -316,3 +317,42 @@ orders etc
 Primary Key : A value which uniquely identifies a record in a colleciton/database.
 
 MongoDB : _id => UUID
+
+
+22 July
+
+Pagination : 
+Page size = 10
+Total recores = 101
+
+Page 1 => 1-10
+Page 2 => 11-20
+Page 3 => 21-30
+....
+Page 11 => 101-110
+
+PageNo 3
+
+PageNo 1
+Limit = 10
+Skip => 0
+
+
+PageNo 2
+Limit = 10
+Skip => 10
+
+PageNo 3
+Limit = 10
+Skip => 20
+
+skip = (pageNo - 1) * pageSize
+
+
+Find all the products having price 499, 280 and 1249
+
+db.products.find({
+    price: {
+        $in: [499,280,1249]
+    }
+})
