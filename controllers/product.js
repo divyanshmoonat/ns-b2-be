@@ -9,7 +9,7 @@ const productsList = async (req, res) => {
   let price = Number(req.query.price);
   let pageNo = Number(req.query.pageNo);
   let searchKey = req.query.searchKey;
-  console.log(searchKey)
+  console.log(searchKey);
   // const productList = await Product.find({}); // Fetch all the records present in Products collection
   const query = {
     rating: {
@@ -18,7 +18,10 @@ const productsList = async (req, res) => {
     price: {
       $gte: price,
     },
-    title: /shirt/i
+    title: {
+      $regex: new RegExp(searchKey),
+      $options: "i",
+    },
   };
 
   const skip = (pageNo - 1) * pageSize; //Offset
@@ -92,4 +95,72 @@ const addProduct = async (req, res) => {
   }
 };
 
-module.exports = { productsList, productDetails, addProduct };
+const editProduct = async (req, res) => {
+  try {
+    // Query first approach
+    const productId = req.params.productId;
+    console.log(productId);
+
+    // const product = await Product.findById(productId);
+    // if (!product) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Invalid product ID/ Product not found",
+    //   });
+    // }
+
+    // Update first
+    const findObj = {
+      // _id: product._id,
+      _id: productId,
+    };
+
+    const updateObj = req.body;
+
+    const updatedProduct = await Product.updateOne(findObj, updateObj);
+
+    // console.log(updatedProduct);
+    // Product.findOneAndUpdate(); // https://mongoosejs.com/docs/api/model.html#Model.findOneAndUpdate()
+
+    res.json({
+      success: true,
+    });
+  } catch (err) {
+    res.status(400).json({
+      success: false,
+      message: "Something went wrong, please try again after sometime",
+    });
+  }
+};
+
+const deleteProduct = async (req, res) => {
+  const productId = req.params.productId;
+
+  const result = await Product.findByIdAndDelete(productId);
+
+  /**
+   * findOneAndDelete(findObj)
+   * deleteMany(findObj)
+   */
+  
+  if (!result) {
+    return res.status(404).json({
+      success: false,
+      message: "Product with given ID does not exists",
+    });
+  }
+
+  console.log(result);
+  res.json({
+    success: true,
+    message: `Product with Id ${result._id} deleted successfully`,
+  });
+};
+
+module.exports = {
+  productsList,
+  productDetails,
+  addProduct,
+  editProduct,
+  deleteProduct,
+};

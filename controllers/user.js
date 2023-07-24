@@ -1,5 +1,13 @@
-const registerUser = (req, res) => {
-  res.json({ success: true, msg: "This is a dummy api /user/register" });
+const User = require("../models/user.js");
+
+const registerUser = async (req, res) => {
+  const userDetails = req.body;
+
+  const newUser = new User(userDetails);
+  const result = await newUser.save();
+  // console.log(result);
+
+  res.json({ success: true, msg: "User registered successfully" });
 };
 
 const loginUser = (req, res) => {

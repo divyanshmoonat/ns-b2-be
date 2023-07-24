@@ -16,7 +16,7 @@ app.use(responseTime());
 app.use(cors());
 
 app.use("/api/v1/cart", cartRoutes); // Connect cartRoutes routes with app
-app.use("/api/v1/user", authMiddleware, userRoutes); // Connect userRoutes routes with app
+app.use("/api/v1/user", userRoutes); // Connect userRoutes routes with app
 app.use("/api/v1/product", productRoutes);
 
 const connectDB = async () => {

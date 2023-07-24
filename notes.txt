@@ -356,3 +356,13 @@ db.products.find({
         $in: [499,280,1249]
     }
 })
+
+24 July
+Regex : Pattern matching
+
+phone : iPhone 9, iPhone X
+shoe : Mens shoes, womens shoes, kids shoes, reebok shoes, nike shoes etc
+
+
+Query First => Find the document and then update it
+Update First => Directly update the document

@@ -17,6 +17,8 @@ const productSchema = {
     type: Number,
     required: false,
     default: 0,
+    max: 30,
+    // validate: () => {} // Custom validators in mongoose
   },
   rating: {
     type: Number,
