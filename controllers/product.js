@@ -142,7 +142,7 @@ const deleteProduct = async (req, res) => {
    * findOneAndDelete(findObj)
    * deleteMany(findObj)
    */
-  
+
   if (!result) {
     return res.status(404).json({
       success: false,
@@ -157,10 +157,30 @@ const deleteProduct = async (req, res) => {
   });
 };
 
+const reviewProduct = async (req, res) => {
+  const productId = req.params.productId;
+
+  console.log(productId);
+  const updateObj = {
+    $set: {
+      reviews: req.body,
+    },
+  };
+
+  const result = await Product.findByIdAndUpdate(productId, updateObj);
+  console.log(result);
+
+  res.json({
+    success: true,
+    message: "Review updated successfully",
+  });
+};
+
 module.exports = {
   productsList,
   productDetails,
   addProduct,
   editProduct,
   deleteProduct,
+  reviewProduct,
 };

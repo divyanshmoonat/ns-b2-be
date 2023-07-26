@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
 
+const reviewSchema = new mongoose.Schema({
+  reviewTitle: String,
+  reviewDescription: String
+});
+
 const productSchema = {
   title: {
     type: String,
@@ -46,6 +51,7 @@ const productSchema = {
     required: false,
     default: [],
   },
+  reviews: [reviewSchema]
 };
 
 const Product = mongoose.model("products", productSchema);

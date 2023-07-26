@@ -14,4 +14,6 @@ router.patch("/edit/:productId", productsController.editProduct);
 
 router.delete("/delete/:productId", productsController.deleteProduct);
 
+router.post("/review/:productId", productsController.reviewProduct);
+
 module.exports = router;

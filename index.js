@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const cartRoutes = require("./routes/cart.js");
 const userRoutes = require("./routes/user.js");
 const productRoutes = require("./routes/product.js");
+const orderRoutes = require("./routes/order.js");
 
 const authMiddleware = require("./middlewares/auth.js");
 
@@ -18,6 +19,7 @@ app.use(cors());
 app.use("/api/v1/cart", cartRoutes); // Connect cartRoutes routes with app
 app.use("/api/v1/user", userRoutes); // Connect userRoutes routes with app
 app.use("/api/v1/product", productRoutes);
+app.use("/api/v1/order", orderRoutes);
 
 const connectDB = async () => {
   await mongoose.connect("mongodb://127.0.0.1:27017/ecommerce");
