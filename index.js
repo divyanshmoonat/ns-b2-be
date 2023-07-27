@@ -16,10 +16,10 @@ app.use(express.json()); // Middleware to get req.body in json format
 app.use(responseTime());
 app.use(cors());
 
-app.use("/api/v1/cart", cartRoutes); // Connect cartRoutes routes with app
+app.use("/api/v1/cart", authMiddleware, cartRoutes); // Connect cartRoutes routes with app
 app.use("/api/v1/user", userRoutes); // Connect userRoutes routes with app
-app.use("/api/v1/product", productRoutes);
-app.use("/api/v1/order", orderRoutes);
+app.use("/api/v1/product", authMiddleware, productRoutes);
+app.use("/api/v1/order", authMiddleware, orderRoutes);
 
 const connectDB = async () => {
   await mongoose.connect("mongodb://127.0.0.1:27017/ecommerce");

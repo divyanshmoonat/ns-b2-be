@@ -1,5 +1,9 @@
-const User = require("../models/user.js");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const User = require("../models/user.js");
+
+const jwtSecretKey = "thisismysecretkey";
 
 const registerUser = async (req, res) => {
   const userDetails = {
@@ -7,6 +11,7 @@ const registerUser = async (req, res) => {
     name: req.body.name,
     mobileNo: req.body.mobileNo,
     address: req.body.address,
+    role: req.body.role,
   };
   const plainTextPassword = req.body.password;
 
@@ -57,10 +62,33 @@ const loginUser = async (req, res) => {
     });
   }
 
+  const currentTimeInSeconds = Math.floor(new Date() / 1000);
+  const expiryTimeInSeconds = currentTimeInSeconds + 60 * 60; // Adding 1 hr to current time
+
+  const tokenPayload = {
+    email: user.email,
+    _id: user._id,
+    exp: expiryTimeInSeconds,
+    role: user.role,
+  };
+  // Generate a JWT
+  const token = jwt.sign(tokenPayload, jwtSecretKey);
+  await User.findByIdAndUpdate(user._id, { token: token });
   res.json({
     succes: true,
     message: "User successfully logged In",
+    token: token,
   });
+};
+
+const logoutUser = async (req, res) => {
+  const token = req.headers.authorization;
+  const decodedToken = jwt.decode(token);
+
+  await User.findByIdAndUpdate(decodedToken._id, { token: "" });
+
+  // console.log(decodedToken);
+  res.json({ success: true });
 };
 
 const forgotPassword = (req, res) => {
@@ -76,4 +104,5 @@ module.exports = {
   loginUser,
   forgotPassword,
   resetPassword,
+  logoutUser,
 };

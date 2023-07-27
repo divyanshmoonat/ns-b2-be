@@ -2,8 +2,10 @@ const Order = require("../models/order.js");
 
 const createOrder = async (req, res) => {
   const orderBody = req.body;
-
-  const order = new Order(orderBody);
+  const order = new Order({
+    ...orderBody,
+    userId: req.user._id,
+  });
   const result = await order.save();
 
   res.json({
@@ -13,7 +15,10 @@ const createOrder = async (req, res) => {
 };
 
 const listOrder = async (req, res) => {
-  const orders = await Order.find({}).populate("productId").populate("userId");
+  // console.log(req.user);
+  const orders = await Order.find({ userId: req.user._id })
+    .populate("productId")
+    .populate("userId");
 
   res.json({
     success: true,

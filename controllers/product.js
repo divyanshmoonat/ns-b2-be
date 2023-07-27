@@ -176,6 +176,10 @@ const reviewProduct = async (req, res) => {
   });
 };
 
+const getRegisteredProducts = async (req, res) => {
+  res.json({ success: true });
+};
+
 module.exports = {
   productsList,
   productDetails,
@@ -183,4 +187,5 @@ module.exports = {
   editProduct,
   deleteProduct,
   reviewProduct,
+  getRegisteredProducts,
 };

@@ -16,4 +16,6 @@ router.delete("/delete/:productId", productsController.deleteProduct);
 
 router.post("/review/:productId", productsController.reviewProduct);
 
+router.get("/registered-product" , productsController.getRegisteredProducts);
+
 module.exports = router;

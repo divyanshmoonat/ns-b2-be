@@ -392,3 +392,13 @@ asdfl
 zxcv
 Abcd@1234
 Hello@123
+
+
+27 July
+
+Generating a JWT : 
+Pre requisits : 
+    1. User information
+    2. Expriry time
+    3. Secret key
+    4. Library to generate JWT
