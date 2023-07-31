@@ -3,12 +3,15 @@ const responseTime = require("response-time");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+require("dotenv").config();
+
 const cartRoutes = require("./routes/cart.js");
 const userRoutes = require("./routes/user.js");
 const productRoutes = require("./routes/product.js");
 const orderRoutes = require("./routes/order.js");
 
 const authMiddleware = require("./middlewares/auth.js");
+const errorMiddlware = require("./middlewares/error.js");
 
 const app = express(); // http.createServer()
 
@@ -21,8 +24,10 @@ app.use("/api/v1/user", userRoutes); // Connect userRoutes routes with app
 app.use("/api/v1/product", authMiddleware, productRoutes);
 app.use("/api/v1/order", authMiddleware, orderRoutes);
 
+app.use(errorMiddlware);
+
 const connectDB = async () => {
-  await mongoose.connect("mongodb://127.0.0.1:27017/ecommerce");
+  await mongoose.connect(process.env.MONGO_URI);
 };
 
 connectDB()

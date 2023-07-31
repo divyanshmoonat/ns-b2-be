@@ -133,7 +133,8 @@ Get : process.env.VARIABLE_NAME
 Middleware : 
 
 
-Requsest -> Middleware (app.use) -> API End point
+Request -> Middleware (app.use) -> API End point -> Response
+Request -> Middleware 1 (app.use) -> Middleware 2 -> Middleware 3 -> API End point -> Middleware 4 -> Middleware 5 -> Middleware n -> Response
 
 Application Level : Applies to the whole app (app.use())
 API Level : Only effects a particular end point

@@ -2,10 +2,12 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user.js");
+const { asyncFunction } = require("../utils/helper.js");
+const logger = require("../utils/logger.js");
 
-const jwtSecretKey = "thisismysecretkey";
+const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
-const registerUser = async (req, res) => {
+const registerUser = asyncFunction(async (req, res) => {
   const userDetails = {
     email: req.body.email,
     name: req.body.name,
@@ -13,6 +15,7 @@ const registerUser = async (req, res) => {
     address: req.body.address,
     role: req.body.role,
   };
+  // throw new Error("ERR IN REG API");
   const plainTextPassword = req.body.password;
 
   /**
@@ -28,19 +31,19 @@ const registerUser = async (req, res) => {
 
   userDetails.password = passwordHash;
 
-  console.log(userDetails);
   // console.log("PASS HASH", passwordHash);
 
   const newUser = new User(userDetails);
   const result = await newUser.save();
   // console.log(result);
-
+  // console.log("User created", userDetails);
+  logger.info("User created", userDetails);
   res.json({ success: true, msg: "User registered successfully" });
-};
+});
 
-const loginUser = async (req, res) => {
+const loginUser = asyncFunction(async (req, res) => {
   const body = req.body;
-
+  throw new Error("ERROR IN LOGIN API");
   const email = body.email;
   const user = await User.findOne({ email: email });
   if (!user) {
@@ -79,9 +82,9 @@ const loginUser = async (req, res) => {
     message: "User successfully logged In",
     token: token,
   });
-};
+});
 
-const logoutUser = async (req, res) => {
+const logoutUser = asyncFunction(async (req, res) => {
   const token = req.headers.authorization;
   const decodedToken = jwt.decode(token);
 
@@ -89,7 +92,7 @@ const logoutUser = async (req, res) => {
 
   // console.log(decodedToken);
   res.json({ success: true });
-};
+});
 
 const forgotPassword = (req, res) => {
   res.json({ success: true, msg: "This is a dummy api /user/forgot-password" });
